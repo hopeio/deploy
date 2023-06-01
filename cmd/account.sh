@@ -2,10 +2,12 @@
 cluster=$1
 if [[ $cluster == tx ]];then
 	server=https://hoper.xyz:6443
-	mkdir ../certs/$cluster
-	echo $CACRT |base64 -d > ../certs/$cluster/ca.crt
-    echo $DEVCRT |base64 -d > ../certs/$cluster/dev.crt
-    echo $DEVKEY |base64 -d > ../certs/$cluster/dev.key
+	if [ ! -d ../certs/$cluster ];then
+        mkdir ../certs/$cluster
+        echo $CACRT |base64 -d > ../certs/$cluster/ca.crt
+        echo $DEVCRT |base64 -d > ../certs/$cluster/dev.crt
+        echo $DEVKEY |base64 -d > ../certs/$cluster/dev.key
+    fi
 elif [[ $1 == tot ]]; then
 	server=https://192.168.1.212:6443
 	cd certs/$cluster
