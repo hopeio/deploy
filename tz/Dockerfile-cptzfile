@@ -1,0 +1,6 @@
+FROM frolvlad/alpine-glibc
+
+#修改容器时区
+ENV TZ=Asia/Shanghai LANG=C.UTF-8
+COPY ./tz/localtime /etc/localtime
+COPY ./tz/timezone /etc/timezone
