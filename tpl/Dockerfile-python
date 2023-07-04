@@ -1,9 +1,10 @@
+FROM jybl/timezone AS tz
+
 FROM jybl/face
 
 ENV TZ=Asia/Shanghai LANG=C.UTF-8
-COPY ./tz/localtime /etc/localtime
-COPY ./tz/timezone /etc/timezone
-RUN mkdir -p /usr/share/zoneinfo/Asia && ln -s /etc/localtime /usr/share/zoneinfo/Asia/Shanghai
+COPY --from=tz /usr/share/zoneinfo/$TZ /usr/share/zoneinfo/$TZ
+RUN echo $TZ > /etc/timezone && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
 
 RUN pip config set global.index-url https://pypi.tuna.tsinghua.edu.cn/simple
 
