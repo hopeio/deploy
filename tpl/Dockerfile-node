@@ -1,10 +1,10 @@
+FROM jybl/timezone AS tz
 FROM node:16.16-alpine3.16
 
 #修改容器时区
 ENV TZ=Asia/Shanghai LANG=C.UTF-8
-COPY ./tz/localtime /etc/localtime
-COPY ./tz/timezone /etc/timezone
-RUN mkdir -p /usr/share/zoneinfo/Asia && ln -s /etc/localtime /usr/share/zoneinfo/Asia/Shanghai
+COPY --from=tz /usr/share/zoneinfo/$TZ /usr/share/zoneinfo/$TZ
+RUN echo $TZ > /etc/timezone && ln -s /usr/share/zoneinfo/$TZ /etc/localtime
 
 WORKDIR /app
 
@@ -12,6 +12,6 @@ ADD . /app
 
 RUN npm install
 
-RUN npm run tsc
+RUN npm run build
 
-CMD ["npx","nodemon", "${cmd}"]
+CMD ["npm","run", "start"]
