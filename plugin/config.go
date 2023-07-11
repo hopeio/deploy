@@ -1,8 +1,7 @@
 package main
 
 import (
-	timei "github.com/hopeio/tailmon/utils/time"
-	"github.com/urfave/cli/v2"
+	timei "github.com/hopeio/dora/utils/time"
 	"strings"
 	"time"
 )
