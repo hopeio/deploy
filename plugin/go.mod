@@ -3,7 +3,7 @@ module github.com/hopeio/deploy/plugin
 go 1.20
 
 require (
-	github.com/hopeio/zeta v1.0.0
+	github.com/hopeio/lemon v1.0.0
 	github.com/urfave/cli/v2 v2.25.7
 )
 
@@ -45,4 +45,4 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/hopeio/zeta => ../../zeta
+replace github.com/hopeio/lemon => ../../lemon

@@ -1,7 +1,7 @@
 package main
 
 import (
-	timei "github.com/hopeio/zeta/utils/time"
+	timei "github.com/hopeio/lemon/utils/time"
 	"github.com/urfave/cli/v2"
 	"strings"
 	"time"
