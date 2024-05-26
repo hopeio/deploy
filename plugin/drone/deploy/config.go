@@ -1,7 +1,7 @@
 package main
 
 import (
-	timei "github.com/hopeio/lemon/utils/time"
+	timei "github.com/hopeio/cherry/utils/time"
 	"github.com/urfave/cli/v2"
 	"strings"
 	"time"
@@ -82,7 +82,7 @@ func GetConfig(c *cli.Context) *Config {
 	if conf.ImageTag == "" {
 		imageTag, found := strings.CutPrefix(conf.CommitTag, conf.FullName+"-v")
 		if !found {
-			conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + time.Now().Format(timei.TimeFormatDisplay)
+			conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + time.Now().Format(timei.LayoutDateTime)
 		} else {
 			if strings.HasPrefix(conf.CommitTag, "v") {
 				conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + conf.CommitTag[1:]

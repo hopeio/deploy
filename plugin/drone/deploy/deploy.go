@@ -3,10 +3,11 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/lemon/tools/drone_plugin/dingding_notify/notify"
-	"github.com/hopeio/lemon/utils/io/fs"
-	osi "github.com/hopeio/lemon/utils/os"
-	stringsi "github.com/hopeio/lemon/utils/strings"
+	"github.com/hopeio/deploy/plugin/drone_plugin/dingding_notify/notify"
+
+	"github.com/hopeio/cherry/utils/io/fs"
+	osi "github.com/hopeio/cherry/utils/os"
+	stringsi "github.com/hopeio/cherry/utils/strings"
 	"github.com/urfave/cli/v2"
 	"os"
 	"strings"
