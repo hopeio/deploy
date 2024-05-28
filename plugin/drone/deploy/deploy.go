@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone_plugin/dingding_notify/notify"
+	"github.com/hopeio/deploy/plugin/drone/dingding_notify/notify"
 
 	"github.com/hopeio/cherry/utils/io/fs"
 	osi "github.com/hopeio/cherry/utils/os"
