@@ -1,4 +1,3 @@
 .idea
 certs
-deploy
-!plugin/drone/deploy
+build

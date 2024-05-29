@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone_plugin/dingding_notify/notify"
+	"github.com/hopeio/deploy/plugin/drone/dingding_notify/notify"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
