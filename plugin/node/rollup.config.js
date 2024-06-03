@@ -43,9 +43,7 @@ export default {
     typescript({
       tsconfig: './tsconfig.json',
     }),
-    resolve({
-      extensions: ['js'],
-    }),
+    resolve(),
     alias({
       entries: {
         '@': pathResolve('src'),
