@@ -38,8 +38,6 @@ spec:
               name: config
             - mountPath: /data
               name: data
-            - mountPath: /static
-              name: static
       volumes:
         - name: config
           hostPath:
@@ -48,9 +46,5 @@ spec:
         - name: data
           hostPath:
             path: ${datadir}/${group}
-            type: DirectoryOrCreate
-        - name: static
-          hostPath:
-            path: ${datadir}/static/${group}
             type: DirectoryOrCreate
 
