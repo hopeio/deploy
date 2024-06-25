@@ -21,6 +21,6 @@ WORKDIR /app
 
 COPY --from=compile /work/dist/${output} /app
 
-RUN npm install nodemon -g
+RUN npm install -g nodemon
 
 CMD ["nodemon", "${cmd}"]

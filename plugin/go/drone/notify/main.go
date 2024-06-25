@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone/dingding_notify/notify"
+	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
@@ -14,7 +14,7 @@ func main() {
 		Name:  "notify",
 		Usage: "通知",
 		Action: func(c *cli.Context) error {
-			return notify.Notify(notify.GetConfig(c))
+			return dingtalk.Notify(dingtalk.GetConfig(c))
 		},
 		Flags: []cli.Flag{
 			&cli.StringFlag{

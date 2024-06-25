@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone/dingding_notify/notify"
+	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
 	"github.com/urfave/cli/v2"
 
 	"github.com/hopeio/cherry/utils/io/fs"
@@ -115,5 +115,5 @@ func Deploy(ctx *cli.Context) error {
 
 	// notify
 
-	return notify.Notify(notify.GetConfig(ctx))
+	return dingtalk.Notify(dingtalk.GetConfig(ctx))
 }
