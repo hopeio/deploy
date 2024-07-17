@@ -2,7 +2,7 @@ package dingtalk
 
 import (
 	"fmt"
-	"github.com/hopeio/cherry/utils/sdk/dingding"
+	"github.com/hopeio/utils/sdk/dingding"
 	"github.com/urfave/cli/v2"
 	"time"
 )

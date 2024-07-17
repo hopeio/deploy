@@ -6,9 +6,9 @@ import (
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
 	"github.com/urfave/cli/v2"
 
-	"github.com/hopeio/cherry/utils/io/fs"
-	osi "github.com/hopeio/cherry/utils/os"
-	stringsi "github.com/hopeio/cherry/utils/strings"
+	"github.com/hopeio/utils/io/fs"
+	osi "github.com/hopeio/utils/os"
+	stringsi "github.com/hopeio/utils/strings"
 	"os"
 	"strings"
 )
