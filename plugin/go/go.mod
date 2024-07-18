@@ -1,4 +1,4 @@
-module github.com/hopeio/deploy/plugin
+module github.com/hopeio/deploy/plugin/go
 
 go 1.22
 
@@ -17,7 +17,6 @@ require (
 	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
 	github.com/gin-gonic/gin v1.10.0 // indirect
 	github.com/goccy/go-json v0.10.3 // indirect
-	github.com/hopeio/protobuf v1.0.0 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/cpuid/v2 v2.2.7 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -43,6 +42,5 @@ require (
 )
 
 replace (
-	github.com/hopeio/protobuf => ../../../thirdparty/protobuf
 	github.com/hopeio/utils => ../../../thirdparty/utils
 )
