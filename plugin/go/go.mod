@@ -2,8 +2,6 @@ module github.com/hopeio/deploy/plugin/go
 
 go 1.22
 
-toolchain go1.22.1
-
 require (
 	github.com/hopeio/utils v1.0.0
 	github.com/urfave/cli/v2 v2.27.2
@@ -42,5 +40,5 @@ require (
 )
 
 replace (
-	github.com/hopeio/utils => ../../../thirdparty/utils
+	github.com/hopeio/utils => ../../../utils
 )

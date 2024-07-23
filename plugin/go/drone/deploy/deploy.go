@@ -3,12 +3,11 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	"github.com/urfave/cli/v2"
-
+	"github.com/hopeio/deploy/plugin/go/drone/notify/dingtalk"
 	"github.com/hopeio/utils/io/fs"
 	osi "github.com/hopeio/utils/os"
 	stringsi "github.com/hopeio/utils/strings"
+	"github.com/urfave/cli/v2"
 	"os"
 	"strings"
 )
