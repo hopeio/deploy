@@ -5,8 +5,9 @@ import (
 	"fmt"
 	"github.com/hopeio/deploy/plugin/go/drone/notify/dingtalk"
 	"github.com/hopeio/utils/io/fs"
-	osi "github.com/hopeio/utils/os"
+	execi "github.com/hopeio/utils/os/exec"
 	stringsi "github.com/hopeio/utils/strings"
+	"github.com/urfave/cli"
 	"github.com/urfave/cli/v2"
 	"os"
 	"strings"
@@ -34,9 +35,9 @@ func Deploy(ctx *cli.Context) error {
 
 	// docker
 
-	osi.CmdLog(fmt.Sprintf(`docker build -f %s -t %s %s`, dockerfilepath, c.ImageTag, c.DeployDir))
-	osi.CmdLog(fmt.Sprintf(`docker login -u %s -p %s`, c.DockerUserName, c.DockerPassword))
-	osi.CmdLog(fmt.Sprintf(`docker push %s`, c.ImageTag))
+	execi.CmdLog(fmt.Sprintf(`docker build -f %s -t %s %s`, dockerfilepath, c.ImageTag, c.DeployDir))
+	execi.CmdLog(fmt.Sprintf(`docker login -u %s -p %s`, c.DockerUserName, c.DockerPassword))
+	execi.CmdLog(fmt.Sprintf(`docker push %s`, c.ImageTag))
 
 	// kubectl
 	deployfile, err := os.ReadFile(TplDir + "/deploy-" + c.DeployKind + ".yaml")
@@ -102,15 +103,15 @@ func Deploy(ctx *cli.Context) error {
 	}
 	kubeconfig := `--kubeconfig=/root/.kube/config`
 
-	osi.CmdLog(fmt.Sprintf(`kubectl config set-cluster k8s --server=%s --certificate-authority=%s --embed-certs=true %s`, server, cacrtpath, kubeconfig))
-	osi.CmdLog(fmt.Sprintf(`kubectl config set-credentials dev --client-certificate=%s --client-key=%s --embed-certs=true %s`, devcrtpath, devkeypath, kubeconfig))
-	osi.CmdLog(fmt.Sprintf(`kubectl config set-context dev --cluster=k8s --user=dev %s`, kubeconfig))
-	osi.CmdLog(fmt.Sprintf(`kubectl config use-context dev %s`, kubeconfig))
+	execi.CmdLog(fmt.Sprintf(`kubectl config set-cluster k8s --server=%s --certificate-authority=%s --embed-certs=true %s`, server, cacrtpath, kubeconfig))
+	execi.CmdLog(fmt.Sprintf(`kubectl config set-credentials dev --client-certificate=%s --client-key=%s --embed-certs=true %s`, devcrtpath, devkeypath, kubeconfig))
+	execi.CmdLog(fmt.Sprintf(`kubectl config set-context dev --cluster=k8s --user=dev %s`, kubeconfig))
+	execi.CmdLog(fmt.Sprintf(`kubectl config use-context dev %s`, kubeconfig))
 
 	if c.DeployKind == "job" || c.DeployKind == "cronjob" {
-		osi.CmdLog(fmt.Sprintf("kubectl %s delete --ignore-not-found -f %s", kubeconfig, deployfile))
+		execi.CmdLog(fmt.Sprintf("kubectl %s delete --ignore-not-found -f %s", kubeconfig, deployfile))
 	}
-	osi.CmdLog(fmt.Sprintf("kubectl %s apply -f %s", kubeconfig, deploypath))
+	execi.CmdLog(fmt.Sprintf("kubectl %s apply -f %s", kubeconfig, deploypath))
 
 	// notify
 
