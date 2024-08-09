@@ -25,7 +25,7 @@ func Deploy(ctx *cli.Context) error {
 		return err
 	}
 	dockerfilepath := c.DeployDir + "/" + c.FullName + "-Dockerfile"
-	docker := stringsi.ToString(dockerfile)
+	docker := stringsi.FromBytes(dockerfile)
 	docker = strings.ReplaceAll(docker, "${app}", c.FullName)
 	docker = strings.ReplaceAll(docker, "${cmd}", strings.Join(c.DockerCmds, `", "`))
 	_, err = fs.Write(stringsi.ToBytes(docker), dockerfilepath)
@@ -45,7 +45,7 @@ func Deploy(ctx *cli.Context) error {
 		return err
 	}
 
-	deploy := stringsi.ToString(deployfile)
+	deploy := stringsi.FromBytes(deployfile)
 	deploy = strings.ReplaceAll(deploy, "${app}", c.FullName)
 	deploy = strings.ReplaceAll(deploy, "${image}", c.ImageTag)
 	deploy = strings.ReplaceAll(deploy, "${group}", c.Group)
