@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/hopeio/deploy/plugin/go/drone/notify/dingtalk"
-	"github.com/hopeio/utils/io/fs"
+	"github.com/hopeio/utils/fs"
 	execi "github.com/hopeio/utils/os/exec"
 	stringsi "github.com/hopeio/utils/strings"
 	"github.com/urfave/cli"
