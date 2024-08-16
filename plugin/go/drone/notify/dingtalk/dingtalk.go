@@ -2,7 +2,7 @@ package dingtalk
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/sdk/dingding"
+	"github.com/hopeio/utils/sdk/dingtalk"
 	"github.com/urfave/cli/v2"
 	"time"
 )
@@ -54,9 +54,9 @@ func Notify(c *Config) error {
 
 	var err error
 	if c.DingSecret != "" {
-		err = dingding.SendRobotMarkDownMessageWithSecret(c.DingToken, c.DingSecret, "发布通知", msg)
+		err = dingtalk.RobotSendMarkDownMessageWithSecret(c.DingToken, c.DingSecret, "发布通知", msg, nil)
 	} else {
-		err = dingding.SendRobotMarkDownMessage(c.DingToken, "发布通知", msg)
+		err = dingtalk.RobotSendMarkDownMessage(c.DingToken, "发布通知", msg, nil)
 	}
 
 	return err
