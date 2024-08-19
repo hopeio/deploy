@@ -5,7 +5,7 @@ go 1.23
 toolchain go1.23.0
 
 require (
-	github.com/hopeio/utils v0.1.7
+	github.com/hopeio/utils v0.1.8
 	github.com/urfave/cli/v2 v2.27.2
 )
 
