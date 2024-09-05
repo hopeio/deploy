@@ -7,7 +7,6 @@ import (
 	"github.com/hopeio/utils/fs"
 	execi "github.com/hopeio/utils/os/exec"
 	stringsi "github.com/hopeio/utils/strings"
-	"github.com/urfave/cli"
 	"github.com/urfave/cli/v2"
 	"os"
 	"strings"
