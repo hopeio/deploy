@@ -9,7 +9,9 @@ WORKDIR /build
 
 ADD . /build
 
-RUN go build -trimpath -o  /build/${output} /build/${sourceFile}
+RUN --mount=type=cache,id=gobuild,target=/root/.cache/go-build \
+    --mount=type=cache,id=gopath,target=/go \
+    go build -trimpath -o  /build/${output} /build/${sourceFile}
 
 # Runtime Image
 FROM frolvlad/alpine-glibc
