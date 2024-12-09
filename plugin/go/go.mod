@@ -2,8 +2,6 @@ module github.com/hopeio/deploy/plugin/go
 
 go 1.23
 
-toolchain go1.23.0
-
 require (
 	github.com/hopeio/utils v0.3.4
 	github.com/urfave/cli/v2 v2.27.2
