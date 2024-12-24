@@ -10,28 +10,21 @@ if [ -z "$1" ]; then
   exit 1
 fi
 
+if [ -n "$3" ]; then
+register="$3/"
+fi
+
 
 GOOS=linux go build -trimpath -o  build/"$1" "$2"
 cmd="\"./$1\",\"-c\",\"./config/$1.toml\""
 dockerfilepath=build/Dockerfile
-cat <<EOF > $dockerfilepath
- FROM jybl/timezone AS tz
+rundir=$(dirname $0)
+source ${rundir}/dockerfile.sh $dockerfilepath $1 $cmd $register
 
- FROM frolvlad/alpine-glibc
-
- #修改容器时区
- ENV TZ=Asia/Shanghai LANG=C.UTF-8
- COPY --from=tz /usr/share/zoneinfo/\$TZ /usr/share/zoneinfo/\$TZ
- RUN echo \$TZ > /etc/timezone && ln -sf /usr/share/zoneinfo/\$TZ /etc/localtime
-
- WORKDIR /app
-
- ADD ./$1 /app
-
- CMD [$cmd]
-EOF
 
 #image=jybl/$1:$(date "+%y%m%d%H%M")
-image=jybl/$1
+image=${register}jybl/$1
+source ${rundir}/deployyaml.sh build/${1}.yaml $1 $image /root/config /data
+source ${rundir}/service.sh build/${1}_service.yaml $1 9000
 echo "docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
 wsl bash -c "cd /mnt/$PWD; pwd; docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
