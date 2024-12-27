@@ -6,7 +6,12 @@ if [ ! -d $buildDir ]; then
 fi
 
 if [ -z "$1" ]; then
-  echo "参数为空"
+  echo "目标参数为空"
+  exit 1
+fi
+
+if [ -z "$2" ]; then
+  echo "源码参数为空"
   exit 1
 fi
 
