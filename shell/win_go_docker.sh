@@ -31,6 +31,6 @@ source ${rundir}/dockerfile.sh $dockerfilepath $1 $cmd $register
 #image=jybl/$1:$(date "+%y%m%d%H%M")
 image=${register}jybl/$1
 source ${rundir}/deployyaml.sh build/${1}.yaml $1 $image /root/config /data
-source ${rundir}/service.sh build/${1}_service.yaml $1 9000
+source ${rundir}/serviceyaml.sh build/${1}_service.yaml $1 9000
 echo "docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
 wsl bash -c "cd /mnt/$PWD; pwd; docker build -t $image -f $dockerfilepath $buildDir; docker push $image"

@@ -21,12 +21,16 @@ fi
 
 
 # build
+echo GOOS=linux go build -trimpath -o  build/"$1" "$2"
 GOOS=linux go build -trimpath -o  build/"$1" "$2"
 cmd="\"./$1\",\"-c\",\"./config/$1.toml\""
 dockerfilepath=build/Dockerfile
-source $(dirname $0)/dockerfile.sh $dockerfilepath $1 $cmd $register
+rundir=$(dirname $0)
+source ${rundir}/dockerfile.sh $dockerfilepath $1 $cmd $register
 
 #docker run --rm -v $GOPATH:/go -v $PWD:/work -w /work -e GOPROXY=$GOPROXY $GOIMAGE go build  -trimpath -o /work/build/$output /work/$1
 image=${register}jybl/$1
+source ${rundir}/deployyaml.sh build/${1}.yaml $1 $image
+source ${rundir}/serviceyaml.sh build/${1}_service.yaml $1 9000
 docker build -t $image -f $dockerfilepath $buildDir; docker push $image
 docker push $image
