@@ -1,0 +1,4 @@
+DRONE_CONVERT_PLUGIN_ENDPOINT
+提供用于向一个扩展发出 http 请求的端点。
+DRONE_CONVERT_PLUGIN_SECRET
+提供用于验证对扩展的 http 请求的令牌。这个令牌在服务器和扩展之间共享。
