@@ -3,7 +3,7 @@ module github.com/hopeio/deploy/plugin/go
 go 1.23
 
 require (
-	github.com/hopeio/utils v0.6.1
+	github.com/hopeio/utils v0.7.0
 	github.com/urfave/cli/v2 v2.27.2
 )
 
