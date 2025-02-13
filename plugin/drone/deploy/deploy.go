@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/deploy/plugin/go/drone/notify/dingtalk"
+	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
 	execi "github.com/hopeio/utils/os/exec"
 	"github.com/hopeio/utils/os/fs"
 	stringsi "github.com/hopeio/utils/strings"

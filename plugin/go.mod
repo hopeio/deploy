@@ -1,4 +1,4 @@
-module github.com/hopeio/deploy/plugin/go
+module github.com/hopeio/deploy/plugin
 
 go 1.23
 

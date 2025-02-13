@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/hopeio/deploy/plugin/go/drone/notify/dingtalk"
+	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
 	"github.com/urfave/cli/v2"
 	"log"
 	"os"
