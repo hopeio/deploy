@@ -4,7 +4,7 @@ go 1.23
 
 require (
 	github.com/drone/drone-go v1.7.1
-	github.com/hopeio/utils v0.13.6
+	github.com/hopeio/utils v0.13.9
 	github.com/urfave/cli/v2 v2.27.2
 )
 
