@@ -1,7 +1,7 @@
 FROM jybl/timezone AS tz
 
 # Builder Image
-FROM jybl/goprotoc AS compile
+FROM jybl/protogen AS compile
 
 ENV GOPROXY=https://goproxy.io,https://goproxy.cn,direct
 
