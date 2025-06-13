@@ -3,36 +3,22 @@ package dingtalk
 import (
 	"fmt"
 	"github.com/hopeio/utils/sdk/dingtalk"
-	"github.com/urfave/cli/v2"
 	"time"
 )
 
 type Config struct {
-	Repo          string
-	CommitAuthor  string
-	Commit        string
-	CommitTag     string
-	CommitRef     string
-	CommitMessage string
-	CommitBranch  string
-	DingToken     string
-	DingSecret    string
-	BuildLink     string
-}
-
-func GetConfig(c *cli.Context) *Config {
-	return &Config{
-		Repo:          c.String("repo"),
-		CommitAuthor:  c.String("commit_author_name"),
-		Commit:        c.String("commit"),
-		CommitTag:     c.String("commit_tag"),
-		CommitRef:     c.String("commit_ref"),
-		CommitMessage: c.String("commit_message"),
-		CommitBranch:  c.String("commit_branch"),
-		DingToken:     c.String("ding_token"),
-		DingSecret:    c.String("ding_secret"),
-		BuildLink:     c.String("drone_build_link"),
-	}
+	Repo             string `flag:"name:repo;usage:deploy repo;env:DRONE_REPO"`
+	Commit           string `flag:"name:commit;usage:commit;env:DRONE_COMMIT"`
+	CommitTag        string `flag:"name:commit_tag;usage:commit_tag;env:DRONE_TAG"`
+	CommitLink       string `flag:"name:commit_link;usage:commit_link;env:DRONE_COMMIT_LINK"`
+	CommitRef        string `flag:"name:commit_ref;usage:commit_ref;env:DRONE_COMMIT_REF"`
+	CommitMessage    string `flag:"name:commit_message;usage:commit_message;env:DRONE_COMMIT_MESSAGE"`
+	CommitBranch     string `flag:"name:commit_branch;usage:commit_branch;env:DRONE_COMMIT_BRANCH"`
+	CommitAuthor     string `flag:"name:commit_author;usage:git commit author;env:DRONE_COMMIT_AUTHOR"`
+	CommitAuthorName string `flag:"name:commit_author_name;usage:git commit author name;env:DRONE_COMMIT_AUTHOR_NAME"`
+	DingToken        string `flag:"name:ding_token;usage:ding_token;env:PLUGIN_DING_TOKEN"`
+	DingSecret       string `flag:"name:ding_secret;usage:ding_secret;env:PLUGIN_DING_SECRET"`
+	BuildLink        string `flag:"name:drone_build_link;usage:drone_build_link;env:DRONE_BUILD_LINK"`
 }
 
 func Notify(c *Config) error {
