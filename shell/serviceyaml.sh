@@ -1,16 +1,26 @@
 #!/bin/bash
 
-if [ -n "$1" ]; then
-   filepath=$1
-fi
-
-if [ -n "$2" ]; then
-   app=$2
-fi
-
-if [ -n "$3" ]; then
-  port="$3"
-fi
+while getopts "f:a:p:" opt; do
+  case $opt in
+    f)
+      filepath="$OPTARG"
+      ;;
+    a)
+      app="$OPTARG"
+      ;;
+    p)
+      port="$OPTARG"
+      ;;
+    \?)
+      echo "Invalid option: -$OPTARG" >&2
+      exit 1
+      ;;
+    :)
+      echo "Option -$OPTARG requires an argument." >&2
+      exit 1
+      ;;
+  esac
+done
 
 cat <<EOF > $filepath
   apiVersion: v1

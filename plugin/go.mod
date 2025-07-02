@@ -7,7 +7,6 @@ toolchain go1.24.0
 require (
 	github.com/drone/drone-go v1.7.1
 	github.com/hopeio/utils v0.17.3-0.20250521102136-fe7549a800ef
-	github.com/urfave/cli/v2 v2.27.2
 )
 
 require (

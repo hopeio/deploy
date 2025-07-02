@@ -1,20 +1,14 @@
 #!/bin/bash
 
-if [ -n "$1" ]; then
-   filepath=$1
-fi
-
-if [ -n "$2" ]; then
-   app=$2
-fi
-
-if [ -n "$3" ]; then
-   cmd=$3
-fi
-
-if [ -n "$4" ]; then
-  register="$4/"
-fi
+while getopts "f:a:c:r:" opt; do
+  case $opt in
+    f) filepath="$OPTARG" ;;
+    a) app="$OPTARG" ;;
+    c) cmd="$OPTARG" ;;
+    r) register="${OPTARG}/" ;;
+    \?) echo "Invalid option -$OPTARG" >&2 ;;
+  esac
+done
 
 cat <<EOF > $filepath
 FROM ${register}jybl/timezone AS tz

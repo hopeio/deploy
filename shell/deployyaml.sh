@@ -1,24 +1,37 @@
 #!/bin/bash
 
-if [ -n "$1" ]; then
-   filepath=$1
-fi
-
-if [ -n "$2" ]; then
-   app=$2
-   group=$2
-fi
-
-if [ -n "$3" ]; then
-  image="$3"
-fi
+# 设置默认值
 confdir=/var/sdk/config
-if [ -n "$4" ]; then
-  confdir="$4"
-fi
 datadir=/var/data
-if [ -n "$5" ]; then
-  datadir="$5"
+
+# 使用getopts解析参数
+while getopts "f:a:i:c:d:" opt; do
+  case $opt in
+    f) filepath="$OPTARG" ;;
+    a)
+       app="$OPTARG"
+       group="$OPTARG" ;;
+    i) image="$OPTARG" ;;
+    c) confdir="$OPTARG" ;;
+    d) datadir="$OPTARG" ;;
+    \?) echo "Invalid option -$OPTARG" >&2 ;;
+  esac
+done
+
+# 参数校验
+if [ -z "$filepath" ]; then
+  echo "必须指定文件路径参数 (-f)" >&2
+  exit 1
+fi
+
+if [ -z "$app" ]; then
+  echo "必须指定应用名称参数 (-a)" >&2
+  exit 1
+fi
+
+if [ -z "$image" ]; then
+  echo "必须指定镜像名称参数 (-i)" >&2
+  exit 1
 fi
 
 cat <<EOF > $filepath

@@ -5,32 +5,39 @@ if [ ! -d $buildDir ]; then
     mkdir $buildDir
 fi
 
-if [ -z "$1" ]; then
-  echo "目标参数为空"
-  exit 1
-fi
+while getopts ":t:s:r:" opt; do
+  case ${opt} in
+    t )
+      target=$OPTARG
+      ;;
+    s )
+      source_path=$OPTARG
+      ;;
+    r )
+      register="$OPTARG/"
+      ;;
+    \? )
+      echo "无效参数: -$OPTARG" 1>&2
+      exit 1
+      ;;
+    : )
+      echo "参数 -$OPTARG 需要一个值" 1>&2
+      exit 1
+      ;;
+  esac
+done
 
-if [ -z "$2" ]; then
-  echo "源码参数为空"
-  exit 1
-fi
-
-if [ -n "$3" ]; then
-register="$3/"
-fi
-
-
-GOOS=linux go build -trimpath -o  build/"$1" "$2"
-cmd="\"./$1\",\"-c\",\"./config/$1.toml\""
+GOOS=linux go build -trimpath -o  build/"$target" "$source_path"
+cmd="\"./$target\",\"-c\",\"./config/$target.toml\""
 dockerfilepath=build/Dockerfile
 rundir=$(realpath $(dirname "${BASH_SOURCE[0]}"))
 echo $rundir
-source ${rundir}/dockerfile.sh $dockerfilepath $1 $cmd $register
+source ${rundir}/dockerfile.sh -f $dockerfilepath -a $target -c $cmd -r $register
 
 
-#image=jybl/$1:$(date "+%y%m%d%H%M")
-image=${register}jybl/$1
-source ${rundir}/deployyaml.sh build/${1}.yaml $1 $image /root/config /data
-source ${rundir}/serviceyaml.sh build/${1}_service.yaml $1 9000
+#image=jybl/$target:$(date "+%y%m%d%H%M")
+image=${register}jybl/$target
+source ${rundir}/deployyaml.sh -f build/${target}.yaml -a $target -i $image -c /root/config -d /data
+source ${rundir}/serviceyaml.sh -f build/${target}_service.yaml -a $target -p 9000
 echo "docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
 wsl bash -c "cd /mnt/$PWD; pwd; docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
