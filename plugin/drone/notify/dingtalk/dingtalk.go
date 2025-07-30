@@ -2,7 +2,7 @@ package dingtalk
 
 import (
 	"fmt"
-	"github.com/hopeio/utils/sdk/dingtalk"
+	"github.com/hopeio/gox/sdk/dingtalk"
 	"time"
 )
 

@@ -6,7 +6,7 @@ toolchain go1.24.0
 
 require (
 	github.com/drone/drone-go v1.7.1
-	github.com/hopeio/utils v0.17.3-0.20250521102136-fe7549a800ef
+	github.com/hopeio/gox v1.0.0
 )
 
 require (
@@ -36,4 +36,4 @@ require (
 	google.golang.org/protobuf v1.36.6 // indirect
 )
 
-replace github.com/hopeio/utils => ../../utils
+replace github.com/hopeio/gox => ../../gox

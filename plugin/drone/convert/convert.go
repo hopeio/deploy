@@ -3,8 +3,8 @@ package main
 import (
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/converter"
-	httpi "github.com/hopeio/utils/net/http"
-	"github.com/hopeio/utils/net/http/binding"
+	httpi "github.com/hopeio/gox/net/http"
+	"github.com/hopeio/gox/net/http/binding"
 	"net/http"
 )
 

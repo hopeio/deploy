@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	timei "github.com/hopeio/utils/time"
+	timei "github.com/hopeio/gox/time"
 	"strings"
 	"time"
 )

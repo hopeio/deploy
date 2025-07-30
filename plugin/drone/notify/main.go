@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	"github.com/hopeio/utils/eflag"
+	"github.com/hopeio/gox/eflag"
 	"github.com/spf13/cobra"
 	"log"
 )

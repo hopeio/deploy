@@ -4,9 +4,9 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	execi "github.com/hopeio/utils/os/exec"
-	"github.com/hopeio/utils/os/fs"
-	stringsi "github.com/hopeio/utils/strings"
+	execi "github.com/hopeio/gox/os/exec"
+	"github.com/hopeio/gox/os/fs"
+	stringsi "github.com/hopeio/gox/strings"
 	"os"
 	"strings"
 )
