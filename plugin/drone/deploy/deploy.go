@@ -4,9 +4,9 @@ import (
 	"encoding/base64"
 	"fmt"
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	execi "github.com/hopeio/gox/os/exec"
+	execx "github.com/hopeio/gox/os/exec"
 	"github.com/hopeio/gox/os/fs"
-	stringsi "github.com/hopeio/gox/strings"
+	stringsx "github.com/hopeio/gox/strings"
 	"os"
 	"strings"
 )
@@ -21,19 +21,19 @@ func Deploy() error {
 		return err
 	}
 	dockerfilepath := config.DeployDir + "/" + config.FullName + "-Dockerfile"
-	docker := stringsi.FromBytes(dockerfile)
+	docker := stringsx.FromBytes(dockerfile)
 	docker = strings.ReplaceAll(docker, "${app}", config.FullName)
 	docker = strings.ReplaceAll(docker, "${cmd}", strings.Join(config.DockerCmds, `", "`))
-	_, err = fs.Write(stringsi.ToBytes(docker), dockerfilepath)
+	_, err = fs.Write(stringsx.ToBytes(docker), dockerfilepath)
 	if err != nil {
 		return err
 	}
 
 	// docker
 
-	execi.RunGetOutWithLog(fmt.Sprintf(`docker build -f %s -t %s %s`, dockerfilepath, config.ImageTag, config.DeployDir))
-	execi.RunGetOutWithLog(fmt.Sprintf(`docker login -u %s -p %s`, config.DockerUserName, config.DockerPassword))
-	execi.RunGetOutWithLog(fmt.Sprintf(`docker push %s`, config.ImageTag))
+	execx.RunGetOutWithLog(fmt.Sprintf(`docker build -f %s -t %s %s`, dockerfilepath, config.ImageTag, config.DeployDir))
+	execx.RunGetOutWithLog(fmt.Sprintf(`docker login -u %s -p %s`, config.DockerUserName, config.DockerPassword))
+	execx.RunGetOutWithLog(fmt.Sprintf(`docker push %s`, config.ImageTag))
 
 	// kubectl
 	deployfile, err := os.ReadFile(TplDir + "/deploy-" + config.DeployKind + ".yaml")
@@ -41,7 +41,7 @@ func Deploy() error {
 		return err
 	}
 
-	deploy := stringsi.FromBytes(deployfile)
+	deploy := stringsx.FromBytes(deployfile)
 	deploy = strings.ReplaceAll(deploy, "${app}", config.FullName)
 	deploy = strings.ReplaceAll(deploy, "${image}", config.ImageTag)
 	deploy = strings.ReplaceAll(deploy, "${group}", config.Group)
@@ -51,7 +51,7 @@ func Deploy() error {
 		deploy = strings.ReplaceAll(deploy, "${schedule}", config.Schedule)
 	}
 	deploypath := config.DeployDir + "/" + config.FullName + "-" + config.DeployKind + ".yaml"
-	_, err = fs.Write(stringsi.ToBytes(deploy), deploypath)
+	_, err = fs.Write(stringsx.ToBytes(deploy), deploypath)
 	if err != nil {
 		return err
 	}
@@ -99,15 +99,15 @@ func Deploy() error {
 	}
 	kubeconfig := `--kubeconfig=/root/.kube/config`
 
-	execi.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-cluster k8s --server=%s --certificate-authority=%s --embed-certs=true %s`, server, cacrtpath, kubeconfig))
-	execi.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-credentials dev --client-certificate=%s --client-key=%s --embed-certs=true %s`, devcrtpath, devkeypath, kubeconfig))
-	execi.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-context dev --cluster=k8s --user=dev %s`, kubeconfig))
-	execi.RunGetOutWithLog(fmt.Sprintf(`kubectl config use-context dev %s`, kubeconfig))
+	execx.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-cluster k8s --server=%s --certificate-authority=%s --embed-certs=true %s`, server, cacrtpath, kubeconfig))
+	execx.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-credentials dev --client-certificate=%s --client-key=%s --embed-certs=true %s`, devcrtpath, devkeypath, kubeconfig))
+	execx.RunGetOutWithLog(fmt.Sprintf(`kubectl config set-context dev --cluster=k8s --user=dev %s`, kubeconfig))
+	execx.RunGetOutWithLog(fmt.Sprintf(`kubectl config use-context dev %s`, kubeconfig))
 
 	if config.DeployKind == "job" || config.DeployKind == "cronjob" {
-		execi.RunGetOutWithLog(fmt.Sprintf("kubectl %s delete --ignore-not-found -f %s", kubeconfig, deployfile))
+		execx.RunGetOutWithLog(fmt.Sprintf("kubectl %s delete --ignore-not-found -f %s", kubeconfig, deployfile))
 	}
-	execi.RunGetOutWithLog(fmt.Sprintf("kubectl %s apply -f %s", kubeconfig, deploypath))
+	execx.RunGetOutWithLog(fmt.Sprintf("kubectl %s apply -f %s", kubeconfig, deploypath))
 
 	// notify
 

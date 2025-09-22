@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/drone/drone-go/drone"
 	"github.com/drone/drone-go/plugin/converter"
-	httpi "github.com/hopeio/gox/net/http"
+	httpx "github.com/hopeio/gox/net/http"
 	"github.com/hopeio/gox/net/http/binding"
 	"net/http"
 )
@@ -13,7 +13,7 @@ func main() {
 		var req converter.Request
 		binding.Bind(r, &req)
 		// TODO:
-		httpi.RespSuccessData(w, &drone.Config{
+		httpx.RespSuccessData(w, &drone.Config{
 			Data: "",
 		})
 	}))
