@@ -6,7 +6,7 @@ toolchain go1.24.0
 
 require (
 	github.com/drone/drone-go v1.7.1
-	github.com/hopeio/gox v1.3.0
+	github.com/hopeio/gox v0.9.1
 )
 
 require (
