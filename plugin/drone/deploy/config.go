@@ -5,7 +5,6 @@ import (
 	"time"
 
 	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
-	timex "github.com/hopeio/gox/time"
 )
 
 const TplDir = "/tpl"
@@ -58,7 +57,7 @@ func (conf *Config) AfterInject() {
 	if conf.ImageTag == "" {
 		imageTag, found := strings.CutPrefix(conf.CommitTag, conf.FullName+"-v")
 		if !found {
-			conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + time.Now().Format(timex.LayoutDateTime)
+			conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + time.Now().Format(time.DateTime)
 		} else {
 			if strings.HasPrefix(conf.CommitTag, "v") {
 				conf.ImageTag = conf.DockerUserName + "/" + conf.FullName + ":" + conf.CommitTag[1:]
