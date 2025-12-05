@@ -1,9 +1,10 @@
 package main
 
 import (
-	"github.com/hopeio/gox/eflag"
-	"github.com/spf13/cobra"
 	"log"
+
+	"github.com/hopeio/gox/flag"
+	"github.com/spf13/cobra"
 )
 
 var config Config
@@ -20,7 +21,7 @@ var rootCmd = &cobra.Command{
 
 func main() {
 	pflag := rootCmd.PersistentFlags()
-	eflag.AddFlag(pflag, &config)
+	flag.AddFlag(pflag, &config)
 
 	if err := rootCmd.Execute(); err != nil {
 		log.Fatal(err)
