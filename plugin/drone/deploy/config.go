@@ -4,7 +4,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
+	"github.com/hopeio/deploy/plugin/notify/dingtalk"
 )
 
 const TplDir = "/tpl"

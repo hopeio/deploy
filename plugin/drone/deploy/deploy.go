@@ -3,12 +3,13 @@ package main
 import (
 	"encoding/base64"
 	"fmt"
-	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
+	"os"
+	"strings"
+
+	"github.com/hopeio/deploy/plugin/notify/dingtalk"
 	execx "github.com/hopeio/gox/os/exec"
 	"github.com/hopeio/gox/os/fs"
 	stringsx "github.com/hopeio/gox/strings"
-	"os"
-	"strings"
 )
 
 func Deploy() error {

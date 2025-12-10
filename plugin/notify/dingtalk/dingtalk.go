@@ -2,8 +2,9 @@ package dingtalk
 
 import (
 	"fmt"
-	"github.com/hopeio/gox/sdk/dingtalk"
 	"time"
+
+	"github.com/hopeio/gox/sdk/dingtalk"
 )
 
 type Config struct {

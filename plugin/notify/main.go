@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/hopeio/deploy/plugin/drone/notify/dingtalk"
+	"github.com/hopeio/deploy/plugin/notify/dingtalk"
 	"github.com/hopeio/gox/flag"
 	"github.com/spf13/cobra"
 )
