@@ -14,7 +14,7 @@ func main() {
 		var req converter.Request
 		binding.Bind(r, &req)
 		// TODO:
-		httpx.RespSuccessData(r.Context(), w, &drone.Config{
+		httpx.RespondSuccess(r.Context(), w, &drone.Config{
 			Data: "",
 		})
 	}))
