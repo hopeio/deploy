@@ -1,9 +1,0 @@
-FROM jybl/timezone AS tz
-
-FROM frolvlad/alpine-glibc
-
-ARG TZ=Asia/Shanghai
-ENV TZ=${TZ} LANG=C.UTF-8
-COPY --from=tz /usr/share/zoneinfo/$TZ /usr/share/zoneinfo/$TZ
-RUN echo $TZ > /etc/timezone && ln -sf /usr/share/zoneinfo/$TZ /etc/localtime
-

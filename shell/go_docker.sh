@@ -41,5 +41,11 @@ source ${rundir}/dockerfile.sh -f $dockerfilepath -a $target -c $cmd -r $registe
 image=${register}jybl/$target
 source ${rundir}/deployyaml.sh build/${target}.yaml $target $image
 source ${rundir}/serviceyaml.sh -f build/${target}_service.yaml -a $target -p 9000
-docker build -t $image -f $dockerfilepath $buildDir; docker push $image
-docker push $image
+echo "docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
+
+if command -v wsl >/dev/null 2>&1; then
+   wsl bash -c "cd /mnt/$PWD; pwd; docker build -t $image -f $dockerfilepath $buildDir; docker push $image"
+else
+   docker build -t $image -f $dockerfilepath $buildDir; docker push $image
+fi
+
